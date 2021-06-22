@@ -1,0 +1,14 @@
+import urllib.request as req
+import bs4 as bs
+#Creat User Profile
+url = 'https://www.wenku8.net/modules/article/reader.php?aid=1973&cid=69567'
+agent = req.Request(url,headers={
+    "user-agent":"Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36"
+})
+with req.urlopen(agent) as response :
+  htmlpage = response.read()#.decode('Big5')
+root = bs.BeautifulSoup(htmlpage,"html.parser").find_all("div",id_="content")
+print(htmlpage)
+
+for i in root:
+  print(i.a.string)
